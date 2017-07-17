@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Unit Testing</title>
+<link rel="stylesheet" type="text/css" href="../../vendor/jasmine-core/lib/jasmine-core/jasmine.css">
+
+
+<script type="text/javascript" src="../../vendor/jasmine-core/lib/jasmine-core/jasmine.js"></script>
+<script type="text/javascript" src="../../vendor/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
+<script type="text/javascript" src="../../vendor/jasmine-core/lib/jasmine-core.js"></script>
+<script type="text/javascript" src="../../vendor/jasmine-core/lib/jasmine-core/boot.js"></script>
+
+<script type="text/javascript" src="../../vendor/angular/angular.js"></script>
+<script type="text/javascript" src="../../vendor/angular-mocks/angular-mocks.js"></script>
+
+<script type="text/javascript" src="../../app/controller/customer.v1.ctrl.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+	describe("customer controller tests", function(){
+		var scope, controller;
+		beforeEach(module("customer_module")); //ng-app
+		// bind controllers and scope
+		beforeEach(inject(function($rootScope, $controller){
+			scope = $rootScope.$new();
+			controller = $controller("CustomerListController", {
+				$scope : scope
+			});	
+		}));
+
+		it("should have 5 customers", function() {
+			expect(scope.customers.length).toEqual(5);
+		});	
+
+
+		it("should delete a customer", function() {
+			scope.deleteCustomer(2);
+			expect(scope.customers.length).toEqual(4);
+		});	
+	});
+</script>
+</body>
+</html>
